@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Karim's Skills - Computer Fundamentals, MS Office, Photoshop, Technical Support">
+  <meta name="keywords" content="Karim, Skills, MS Office, Photoshop, Technical Support, Computer Hardware">
+  <meta name="author" content="Karim">
+  
+  <title>Skills - Karim | Professional Portfolio</title>
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💼</text></svg>">
+</head>
+<body>
+  
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">KARIM</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html" class="active">Skills</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2 class="section-title">My Expertise</h2>
+    <div class="skills-grid">
+      
+      <div class="skill-card fade-in">
+        <div class="skill-icon">📝</div>
+        <h3>MS Office Suite</h3>
+        <p>
+          Expert in Microsoft Word, Excel, and PowerPoint. Creating professional 
+          documents, spreadsheets, and presentations with advanced formatting and 
+          data analysis capabilities.
+        </p>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🎨</div>
+        <h3>Photoshop & Graphic Design</h3>
+        <p>
+          Proficient in Adobe Photoshop for image editing, graphic design, and 
+          creative visual content. Creating stunning designs for various projects 
+          and digital media.
+        </p>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🖥️</div>
+        <h3>Computer Hardware</h3>
+        <p>
+          Deep knowledge of computer hardware components, assembly, upgrades, 
+          and maintenance. Hands-on experience with troubleshooting and repairing 
+          hardware issues.
+        </p>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🔧</div>
+        <h3>Software Troubleshooting</h3>
+        <p>
+          Quick diagnosis and resolution of software problems. Experienced in 
+          system optimization, virus removal, software installation, and 
+          configuration management.
+        </p>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🌐</div>
+        <h3>Internet Browsing</h3>
+        <p>
+          Fast and efficient internet research, online tools mastery, and 
+          web-based applications. Experienced in finding information quickly 
+          and utilizing online resources effectively.
+        </p>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">💻</div>
+        <h3>Computer Fundamentals</h3>
+        <p>
+          Strong foundation in computer basics, operating systems, file management, 
+          and general computing concepts. Able to work efficiently with various 
+          computer systems and applications.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="social-links">
+      <a href="https://github.com/karim" class="social-link" target="_blank" aria-label="GitHub">
+        <span>💻</span>
+      </a>
+      <a href="https://www.linkedin.com/in/ansarul-karim-b87660337/" class="social-link" target="_blank" aria-label="LinkedIn">
+        <span>💼</span>
+      </a>
+      <a href="https://twitter.com/karim" class="social-link" target="_blank" aria-label="Twitter">
+        <span>🐦</span>
+      </a>
+      <a href="mailto:ansarulkarem@gmail.com" class="social-link" aria-label="Email">
+        <span>📧</span>
+      </a>
+    </div>
+    <p class="footer-text">
+      &copy; 2025 Karim. Designed & Built with passion for technology.
+    </p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(element => {
+      observer.observe(element);
+    });
+
+    // Dynamic year in footer
+    const footerText = document.querySelector('.footer-text');
+    const currentYear = new Date().getFullYear();
+    footerText.innerHTML = footerText.innerHTML.replace('2025', currentYear);
+  </script>
+
+</body>
+</html>

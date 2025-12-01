@@ -3,16 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Karim's Portfolio - Computer Operator specializing in MS Office, Photoshop, and technical troubleshooting.">
-  <meta name="keywords" content="Karim, Portfolio, Computer Operator, MS Office, Photoshop, Technical Support">
+  <meta name="description" content="Contact Karim - Get in touch for computer support and services">
+  <meta name="keywords" content="Karim, Contact, Email, LinkedIn">
   <meta name="author" content="Karim">
   
-  <!-- SEO Meta Tags -->
-  <meta property="og:title" content="Karim - Computer Operator & Technical Expert">
-  <meta property="og:description" content="Professional portfolio showcasing skills in computer fundamentals and technical support.">
-  <meta property="og:type" content="website">
-  
-  <title>Karim - Computer Operator | Professional Portfolio</title>
+  <title>Contact - Karim | Professional Portfolio</title>
   
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
@@ -27,26 +22,50 @@
     <div class="container">
       <a href="index.html" class="logo">KARIM</a>
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="skills.html">Skills</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <p class="hero-subtitle">Welcome to my Portfolio</p>
-      <h1>Hi, I'm Karim</h1>
-      <p class="hero-description">
-        I have strong skills in Computer Fundamentals and can confidently work with MS Word, MS Excel, and PowerPoint. I am experienced in fast internet browsing, Photoshop, and graphic design. I also have hands-on expertise in computer hardware and software troubleshooting, allowing me to quickly diagnose and fix technical issues.
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact-content">
+      <h2 class="section-title">Let's Connect</h2>
+      <p class="mb-3">
+        I'm always open to discussing new projects, creative ideas, or 
+        opportunities to be part of your vision. Feel free to reach out!
       </p>
-      <div class="hero-cta">
-        <a href="projects.html" class="btn btn-primary">View My Work</a>
-        <a href="contact.html" class="btn btn-outline">Get In Touch</a>
+      
+      <div class="contact-grid">
+        
+        <a href="mailto:ansarulkarem@gmail.com" class="contact-card fade-in">
+          <div class="contact-icon">📧</div>
+          <h3>Email</h3>
+          <p>ansarulkarem@gmail.com</p>
+        </a>
+
+        <a href="https://github.com/karim" target="_blank" class="contact-card fade-in">
+          <div class="contact-icon">💻</div>
+          <h3>GitHub</h3>
+          <p>@karim</p>
+        </a>
+
+        <a href="https://www.linkedin.com/in/ansarul-karim-b87660337/" target="_blank" class="contact-card fade-in">
+          <div class="contact-icon">💼</div>
+          <h3>LinkedIn</h3>
+          <p>/in/ansarul-karim-b87660337</p>
+        </a>
+
+        <a href="https://twitter.com/karim" target="_blank" class="contact-card fade-in">
+          <div class="contact-icon">🐦</div>
+          <h3>Twitter</h3>
+          <p>@karim</p>
+        </a>
+
       </div>
     </div>
   </section>
@@ -83,6 +102,25 @@
       } else {
         navbar.classList.remove('scrolled');
       }
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(element => {
+      observer.observe(element);
     });
 
     // Dynamic year in footer
