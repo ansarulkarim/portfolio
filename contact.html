@@ -69,6 +69,28 @@
         </a>
 
       </div>
+
+      <!-- Subscription Panel -->
+      <div class="subscription-panel fade-in">
+        <div class="subscription-icon">📬</div>
+        <h3>Stay Updated</h3>
+        <p>Subscribe to get the latest updates and news directly to your inbox!</p>
+        <form class="subscription-form" id="subscriptionForm">
+          <input 
+            type="email" 
+            id="emailInput" 
+            class="email-input" 
+            placeholder="Enter your email address" 
+            required
+            aria-label="Email address"
+          >
+          <button type="submit" class="btn btn-primary subscribe-btn">
+            Subscribe
+          </button>
+        </form>
+        <p class="subscription-message" id="subscriptionMessage"></p>
+      </div>
+
     </div>
   </section>
 
@@ -124,6 +146,42 @@
     document.querySelectorAll('.fade-in').forEach(element => {
       observer.observe(element);
     });
+
+    // Subscription form handling
+    const subscriptionForm = document.getElementById('subscriptionForm');
+    const emailInput = document.getElementById('emailInput');
+    const subscriptionMessage = document.getElementById('subscriptionMessage');
+
+    subscriptionForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const email = emailInput.value.trim();
+      
+      if (email && validateEmail(email)) {
+        // Simulate subscription (in a real app, this would send to a backend)
+        subscriptionMessage.textContent = '🎉 Thank you for subscribing! Check your inbox for confirmation.';
+        subscriptionMessage.style.color = 'var(--accent-primary)';
+        subscriptionMessage.style.marginTop = '1rem';
+        
+        // Clear the input
+        emailInput.value = '';
+        
+        // Clear message after 5 seconds
+        setTimeout(() => {
+          subscriptionMessage.textContent = '';
+        }, 5000);
+      } else {
+        subscriptionMessage.textContent = '❌ Please enter a valid email address.';
+        subscriptionMessage.style.color = 'var(--accent-tertiary)';
+        subscriptionMessage.style.marginTop = '1rem';
+      }
+    });
+
+    // Email validation function
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
 
     // Dynamic year in footer
     const footerText = document.querySelector('.footer-text');
