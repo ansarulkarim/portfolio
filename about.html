@@ -35,6 +35,9 @@
 
   <!-- About Section -->
   <section id="about">
+    <button class="print-btn" onclick="printSection('about')" aria-label="Print this section">
+      🖨️ Print
+    </button>
     <h2 class="section-title">About Me</h2>
     <div class="about-content">
       <div class="about-text">
@@ -92,6 +95,30 @@
     const footerText = document.querySelector('.footer-text');
     const currentYear = new Date().getFullYear();
     footerText.innerHTML = footerText.innerHTML.replace('2025', currentYear);
+
+    // Print section function
+    function printSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      const printWindow = window.open('', '', 'height=600,width=800');
+      
+      printWindow.document.write('<html><head><title>Print</title>');
+      printWindow.document.write('<link rel="stylesheet" href="style.css">');
+      printWindow.document.write('<style>');
+      printWindow.document.write('body { padding: 20px; } .print-btn { display: none; }');
+      printWindow.document.write('.navbar { display: none; } .footer { display: none; }');
+      printWindow.document.write('</style>');
+      printWindow.document.write('</head><body>');
+      printWindow.document.write(section.innerHTML);
+      printWindow.document.write('</body></html>');
+      
+      printWindow.document.close();
+      printWindow.focus();
+      
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+      }, 250);
+    }
   </script>
 
 </body>

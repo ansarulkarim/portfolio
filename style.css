@@ -791,6 +791,58 @@ section {
 }
 
 /* ========================================
+   PRINT BUTTON
+   ======================================== */
+.print-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 0.75rem 1.5rem;
+  background: var(--gradient-hero);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.print-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--glow-primary);
+}
+
+.print-btn:active {
+  transform: translateY(0);
+}
+
+/* Print media query */
+@media print {
+  .print-btn {
+    display: none;
+  }
+  
+  .navbar {
+    display: none;
+  }
+  
+  .footer {
+    display: none;
+  }
+  
+  section {
+    page-break-after: always;
+  }
+}
+
+/* ========================================
    FOOTER
    ======================================== */
 .footer {
