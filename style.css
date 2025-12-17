@@ -461,6 +461,17 @@ section {
   opacity: 0.1;
 }
 
+/* Animation from user request */
+.about-image {
+  animation: slideIn 2s infinite alternate;
+}
+
+@keyframes slideIn {
+  0% { transform: translateX(-20px); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(20px); }
+}
+
 /* ========================================
    SKILLS SECTION
    ======================================== */
