@@ -148,6 +148,31 @@ h1 {
   }
 }
 
+/* Animated Name Effect (=Karim=) */
+.animated-name {
+  display: inline-block;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="50" fill="%23667eea">★</text><text x="20" y="50" font-size="50" fill="%23764ba2">★</text><text x="40" y="50" font-size="50" fill="%23f093fb">★</text><text x="60" y="50" font-size="50" fill="%23667eea">★</text><text x="80" y="50" font-size="50" fill="%23764ba2">★</text></svg>'),
+              linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #667eea 100%);
+  background-size: 200px 200px, 400% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: animateText 20s linear infinite;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+@keyframes animateText {
+  0% {
+    background-position: 0px 0px, 0% 50%;
+  }
+  100% {
+    background-position: -500px 0px, 400% 50%;
+  }
+}
+
+
 h2 {
   font-size: clamp(2rem, 5vw, 3.5rem);
   color: var(--text-primary);
@@ -656,38 +681,78 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
   padding: var(--spacing-md);
-  transition: all var(--transition-base);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   display: block;
   height: 100%;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
+/* Glowing border effect */
 .contact-card::before {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #667eea);
+  background-size: 400% 400%;
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+  animation: gradientRotate 3s ease infinite;
+}
+
+@keyframes gradientRotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Spotlight effect that follows cursor */
+.contact-card::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: var(--mouse-y, 50%);
+  left: var(--mouse-x, 50%);
+  transform: translate(-50%, -50%);
   background: radial-gradient(
     circle,
-    rgba(99, 102, 241, 0.15) 0%,
+    rgba(99, 102, 241, 0.4) 0%,
+    rgba(139, 92, 246, 0.2) 25%,
     transparent 70%
   );
   opacity: 0;
-  transition: var(--transition-base);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .contact-card:hover::before {
   opacity: 1;
 }
 
+.contact-card:hover::after {
+  opacity: 1;
+}
+
 .contact-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-lg), var(--glow-primary);
+  transform: translateY(-12px) scale(1.05);
+  border-color: transparent;
+  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3),
+              0 0 40px rgba(139, 92, 246, 0.2);
 }
 
 .contact-card.active-slide {
@@ -698,18 +763,43 @@ section {
 .contact-icon {
   font-size: 2.5rem;
   margin-bottom: var(--spacing-sm);
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.contact-card:hover .contact-icon {
+  transform: scale(1.2) rotateY(360deg);
+  filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.6));
 }
 
 .contact-card h3 {
   color: var(--text-primary);
   font-size: 1.25rem;
   margin-bottom: var(--spacing-xs);
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover h3 {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .contact-card p {
   color: var(--text-secondary);
   font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
 }
+
+.contact-card:hover p {
+  color: var(--text-primary);
+}
+
 
 /* Slider Navigation Buttons */
 .slider-nav {

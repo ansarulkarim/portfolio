@@ -341,6 +341,18 @@
     createDots();
     updateSlider();
 
+    // Mouse move effect for contact cards (Spotlight effect)
+    document.querySelectorAll('.contact-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
     // Update on window resize
     window.addEventListener('resize', updateSlider);
   </script>
