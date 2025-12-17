@@ -45,39 +45,58 @@
         opportunities to be part of your vision. Feel free to reach out!
       </p>
       
-      <div class="contact-grid">
-        
-        <a href="mailto:ansarulkarem@gmail.com" class="contact-card fade-in">
-          <div class="contact-icon">📧</div>
-          <h3>Email</h3>
-          <p>ansarulkarem@gmail.com</p>
-        </a>
+      <!-- Contact Slider Container -->
+      <div class="contact-slider-container">
+        <!-- Previous Button -->
+        <button class="slider-nav prev" onclick="changeSlide(-1)" aria-label="Previous contact">
+          ‹
+        </button>
 
-        <a href="https://github.com/karim" target="_blank" class="contact-card fade-in">
-          <div class="contact-icon">💻</div>
-          <h3>GitHub</h3>
-          <p>@karim</p>
-        </a>
+        <!-- Contact Slider -->
+        <div class="contact-slider">
+          <div class="contact-slides">
+            
+            <a href="mailto:ansarulkarem@gmail.com" class="contact-card slide-item">
+              <div class="contact-icon">📧</div>
+              <h3>Email</h3>
+              <p>ansarulkarem@gmail.com</p>
+            </a>
 
-        <a href="https://www.linkedin.com/in/ansarul-karim-b87660337/" target="_blank" class="contact-card fade-in">
-          <div class="contact-icon">💼</div>
-          <h3>LinkedIn</h3>
-          <p>/in/ansarul-karim-b87660337</p>
-        </a>
+            <a href="https://github.com/karim" target="_blank" class="contact-card slide-item">
+              <div class="contact-icon">💻</div>
+              <h3>GitHub</h3>
+              <p>@karim</p>
+            </a>
 
-        <a href="https://x.com/MdansarulK27626" target="_blank" class="contact-card fade-in">
-          <div class="contact-icon">🐦</div>
-          <h3>Twitter</h3>
-          <p>@MdansarulK27626</p>
-        </a>
+            <a href="https://www.linkedin.com/in/ansarul-karim-b87660337/" target="_blank" class="contact-card slide-item">
+              <div class="contact-icon">💼</div>
+              <h3>LinkedIn</h3>
+              <p>/in/ansarul-karim-b87660337</p>
+            </a>
 
-        <a href="https://wa.me/8801862734944" target="_blank" class="contact-card fade-in">
-          <div class="contact-icon">💬</div>
-          <h3>WhatsApp</h3>
-          <p>+880 1862734944</p>
-        </a>
+            <a href="https://x.com/MdansarulK27626" target="_blank" class="contact-card slide-item">
+              <div class="contact-icon">🐦</div>
+              <h3>Twitter</h3>
+              <p>@MdansarulK27626</p>
+            </a>
 
+            <a href="https://wa.me/8801862734944" target="_blank" class="contact-card slide-item">
+              <div class="contact-icon">💬</div>
+              <h3>WhatsApp</h3>
+              <p>+880 1862734944</p>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- Next Button -->
+        <button class="slider-nav next" onclick="changeSlide(1)" aria-label="Next contact">
+          ›
+        </button>
       </div>
+
+      <!-- Slider Dots/Indicators -->
+      <div class="slider-dots" id="sliderDots"></div>
 
       <!-- Subscription Panel -->
       <div class="subscription-panel fade-in">
@@ -220,6 +239,110 @@
         printWindow.close();
       }, 250);
     }
+
+    // ========================================
+    // CONTACT SLIDER FUNCTIONALITY
+    // ========================================
+    let currentSlide = 0;
+    const slidesContainer = document.querySelector('.contact-slides');
+    const slides = document.querySelectorAll('.slide-item');
+    const totalSlides = slides.length;
+    const dotsContainer = document.getElementById('sliderDots');
+
+    // Create dots/indicators
+    function createDots() {
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    // Go to specific slide
+    function goToSlide(n) {
+      currentSlide = n;
+      if (currentSlide >= totalSlides) currentSlide = 0;
+      if (currentSlide < 0) currentSlide = totalSlides - 1;
+      
+      updateSlider();
+    }
+
+    // Change slide (next/prev)
+    function changeSlide(direction) {
+      currentSlide += direction;
+      if (currentSlide >= totalSlides) currentSlide = 0;
+      if (currentSlide < 0) currentSlide = totalSlides - 1;
+      
+      updateSlider();
+    }
+
+    // Update slider position and active states
+    function updateSlider() {
+      // Calculate how many slides to show based on screen width
+      let slidesToShow = 3; // Default: show 3 slides
+      if (window.innerWidth <= 900) slidesToShow = 2;
+      if (window.innerWidth <= 600) slidesToShow = 1;
+      
+      // Calculate the offset
+      const slideWidth = 100 / slidesToShow;
+      const offset = -currentSlide * slideWidth;
+      
+      slidesContainer.style.transform = `translateX(${offset}%)`;
+      
+      // Update dots
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+      
+      // Add active class to current slide
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active-slide', index === currentSlide);
+      });
+    }
+
+    // Auto-play slider (optional - uncomment to enable)
+    // let autoPlayInterval = setInterval(() => changeSlide(1), 4000);
+
+    // Pause auto-play on hover (if auto-play is enabled)
+    // const sliderContainer = document.querySelector('.contact-slider-container');
+    // sliderContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    // sliderContainer.addEventListener('mouseleave', () => {
+    //   autoPlayInterval = setInterval(() => changeSlide(1), 4000);
+    // });
+
+    // Touch/Swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slidesContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    slidesContainer.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) changeSlide(1); // Swipe left
+      if (touchEndX > touchStartX + 50) changeSlide(-1); // Swipe right
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+      if (e.key === 'ArrowRight') changeSlide(1);
+    });
+
+    // Initialize slider
+    createDots();
+    updateSlider();
+
+    // Update on window resize
+    window.addEventListener('resize', updateSlider);
   </script>
 
 </body>

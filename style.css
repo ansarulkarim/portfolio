@@ -613,50 +613,86 @@ section {
 }
 
 /* ========================================
-   CONTACT SECTION
+   CONTACT SECTION - SLIDER
    ======================================== */
 .contact-content {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
 
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+/* Slider Container */
+.contact-slider-container {
+  position: relative;
+  max-width: 1200px;
+  margin: var(--spacing-lg) auto;
+  padding: 0 4rem;
+}
+
+/* Slider Wrapper */
+.contact-slider {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+/* Slides Container */
+.contact-slides {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
 }
 
-/* Responsive: Stack to 2 columns on tablets */
-@media (max-width: 900px) {
-  .contact-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Individual Slide Item */
+.slide-item {
+  flex: 0 0 calc(33.333% - var(--spacing-md));
+  min-width: 0;
 }
 
-/* Responsive: Stack to 1 column on mobile */
-@media (max-width: 600px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
+/* Contact Card Styles */
 .contact-card {
   background: var(--card-bg);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
   padding: var(--spacing-md);
-  transition: var(--transition-base);
+  transition: all var(--transition-base);
   text-decoration: none;
   display: block;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.15) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: var(--transition-base);
+}
+
+.contact-card:hover::before {
+  opacity: 1;
 }
 
 .contact-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(1.02);
   border-color: var(--accent-primary);
   box-shadow: var(--shadow-lg), var(--glow-primary);
+}
+
+.contact-card.active-slide {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(99, 102, 241, 0.3);
 }
 
 .contact-icon {
@@ -673,6 +709,115 @@ section {
 .contact-card p {
   color: var(--text-secondary);
   font-size: 1rem;
+}
+
+/* Slider Navigation Buttons */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  box-shadow: var(--shadow-md);
+}
+
+.slider-nav:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  box-shadow: var(--glow-primary);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slider-nav.prev {
+  left: 0;
+}
+
+.slider-nav.next {
+  right: 0;
+}
+
+/* Slider Dots/Indicators */
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: var(--spacing-md);
+  position: relative;
+  z-index: 5;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.2);
+}
+
+.dot.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+  width: 32px;
+  border-radius: 6px;
+}
+
+/* Responsive Slider Styles */
+@media (max-width: 900px) {
+  .slide-item {
+    flex: 0 0 calc(50% - var(--spacing-md));
+  }
+  
+  .contact-slider-container {
+    padding: 0 3.5rem;
+  }
+  
+  .slider-nav {
+    width: 45px;
+    height: 45px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .slide-item {
+    flex: 0 0 100%;
+  }
+  
+  .contact-slider-container {
+    padding: 0 3rem;
+  }
+  
+  .slider-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.75rem;
+  }
+  
+  .contact-card {
+    padding: var(--spacing-sm);
+  }
 }
 
 /* Subscription Panel */
