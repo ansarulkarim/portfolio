@@ -428,40 +428,48 @@ section {
 
 .about-image {
   position: relative;
-  height: 450px; /* Adjusted height for better visibility */
-  width: 100%;
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-xl);
-  background: var(--card-bg); /* Fallback */
 }
 
 .about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: var(--transition-slow);
+}
+
+.about-image:hover img {
+  transform: scale(1.05);
+}
+
+.about-image::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out, transform 6s ease;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-hero);
+  opacity: 0.2;
   z-index: 1;
+  transition: var(--transition-base);
 }
 
-.about-image img.active-slide {
-  opacity: 1;
-  z-index: 2;
-  transform: scale(1.1); /* Subtle premium zoom effect */
+.about-image:hover::before {
+  opacity: 0.1;
 }
 
-/* Optional: Add a subtle overlay so text is readable if ever placed over */
-.about-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
-  z-index: 3;
-  pointer-events: none;
+/* Animation from user request */
+.about-image {
+  animation: slideIn 2s infinite alternate;
+}
+
+@keyframes slideIn {
+  0% { transform: translateX(-20px); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(20px); }
 }
 
 /* ========================================

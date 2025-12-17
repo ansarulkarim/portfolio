@@ -51,14 +51,8 @@
           With a combination of technical knowledge, creativity, and problem-solving abilities, I can deliver high-quality work and support both personal and professional digital needs.
         </p>
       </div>
-      <div class="about-image" id="about-slideshow">
-        <!-- Main Profile Photo (Front) -->
-        <img src="https://drive.google.com/thumbnail?id=1PxMMETbW6D188NqMoin5Ws3RXgGa2SxX&sz=w1000" class="active-slide" alt="Ansasul Karim">
-        
-        <!-- Rotating Slides (Certificates/Work) -->
-        <img src="https://drive.google.com/thumbnail?id=1y8ZkCZ-CqYXDq64M7UU2WbvXyfYc8TN0&sz=w1000" alt="Certificate 1">
-        <img src="https://drive.google.com/thumbnail?id=1cWYHXqj84rHNwqIdboW_5M-rr7zVnwC0&sz=w1000" alt="Certificate 2">
-        <img src="https://drive.google.com/thumbnail?id=1plk_Rtzxpj43Y9hWry8dASdqOK1Cdg6k&sz=w1000" alt="Certificate 3">
+      <div class="about-image">
+        <img src="https://drive.google.com/thumbnail?id=1PxMMETbW6D188NqMoin5Ws3RXgGa2SxX&sz=w1000" alt="My photo">
       </div>
     </div>
   </section>
@@ -101,35 +95,6 @@
     const footerText = document.querySelector('.footer-text');
     const currentYear = new Date().getFullYear();
     footerText.innerHTML = footerText.innerHTML.replace('2025', currentYear);
-
-    // Automatic Slideshow for About Image
-    const slideshowContainer = document.getElementById('about-slideshow');
-    if (slideshowContainer) {
-      const slides = slideshowContainer.querySelectorAll('img');
-      let currentSlide = 0;
-      let slideInterval;
-
-      function nextSlide() {
-        slides[currentSlide].classList.remove('active-slide');
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active-slide');
-      }
-
-      function startSlideshow() {
-        slideInterval = setInterval(nextSlide, 3500); // Change image every 3.5 seconds
-      }
-
-      function stopSlideshow() {
-        clearInterval(slideInterval);
-      }
-
-      // Start automatically
-      startSlideshow();
-
-      // Optional: Pause on hover if user wants to examine a slide
-      slideshowContainer.addEventListener('mouseenter', stopSlideshow);
-      slideshowContainer.addEventListener('mouseleave', startSlideshow);
-    }
 
     // Print section function
     function printSection(sectionId) {
